@@ -1,0 +1,6 @@
+kafka-python==2.0.2
+apache-flink==1.14.0
+fastapi==0.68.0
+uvicorn==0.15.0
+yfinance==0.1.63
+sqlalchemy==1.4.23
