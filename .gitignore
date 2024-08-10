@@ -1,4 +1,27 @@
+# Virtual environment
 venv/
+.env
+
+# Python bytecode
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+
+# SQLite database files
 *.db
+
+# Docker files
+*.dockerignore
+docker-compose.override.yml
+
+# Logs
+*.log
+
+# Environment variables
+.env
+
+# IDE and editor settings
+.vscode/
+.idea/
+*.swp
