@@ -4,9 +4,15 @@ from pyflink.table import StreamTableEnvironment, EnvironmentSettings
 from pyflink.common.serialization import SimpleStringSchema
 from pyflink.datastream.connectors import FlinkKafkaConsumer, FlinkKafkaProducer
 import json
-from .database import SessionLocal
-from .stock_service import create_stock_data
+import logging
+from app.database import SessionLocal
+from app.stock_service import create_stock_data
 from datetime import datetime
+
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 KAFKA_BOOTSTRAP_SERVERS = os.getenv('KAFKA_BOOTSTRAP_SERVERS', 'localhost:9092')
 
@@ -44,6 +50,7 @@ def process_stock_data():
 
     #Process each piece of stock data from Kafka
     def calculate_moving_average(data):
+        logger.info(f"Received data: {data}")
         #parse incoming data to a dictionary
         data = json.loads(data)
 

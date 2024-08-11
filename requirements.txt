@@ -1,6 +1,9 @@
 kafka-python==2.0.2
-apache-flink==1.14.0
+yfinance==0.1.70
+sqlalchemy==1.4.31
 fastapi==0.68.0
 uvicorn==0.15.0
-yfinance==0.1.63
-sqlalchemy==1.4.23
+apache-flink==1.15.0
+numpy==1.21.6
+pandas==1.1
+python-dateutil==2.8.2
