@@ -15,14 +15,22 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 KAFKA_BOOTSTRAP_SERVERS = os.getenv('KAFKA_BOOTSTRAP_SERVERS', 'localhost:9092')
+FLINK_JOB_MANAGER_RPC_ADDRESS = os.getenv('FLINK_JOB_MANAGER_RPC_ADDRESS', 'localhost')
+FLINK_JOB_MANAGER_PORT = os.getenv('FLINK_JOB_MANAGER_PORT', '8081')
 
 def process_stock_data():
     #Initialize context in which the streaming job will run
     env = StreamExecutionEnvironment.get_execution_environment()
 
+    # Add Kafka connector JAR to the classpath
+    #kafka_jar = os.path.join(os.path.dirname(__file__), '..', 'lib', 'flink-connector-kafka-3.0.0-1.17.jar')
+
+    kafka_jar = "file:///C:\\Users\\nasus\\Desktop\\CS_Personal\\StockKafkaPyApp\\stock_analyzer\\lib\\flink-connector-kafka-3.2.0-1.19.jar"
+    env.add_jars(kafka_jar)
+
     #Start config of a new environment, specify the environment is configured for streaming, 
     # use blink planner to optimize batch and streaming process, build environment
-    settings = EnvironmentSettings.new_instance().in_streaming_mode().use_blink_planner().build()
+    settings = EnvironmentSettings.new_instance().in_streaming_mode().build()
 
     #Create the execution environment 
     t_env = StreamTableEnvironment.create(env, environment_settings=settings)
